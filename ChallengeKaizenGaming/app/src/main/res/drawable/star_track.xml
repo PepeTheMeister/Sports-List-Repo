@@ -1,0 +1,19 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true">
+        <shape android:shape="rectangle">
+            <size android:height="1dp" android:width="3dp"/>
+            <corners android:radius="16dp" />
+            <solid android:color="@color/background_screen" />
+        </shape>
+    </item>
+
+
+    <item android:state_checked="false">
+        <shape android:shape="rectangle">
+            <size android:height="1dp" android:width="3dp"/>
+            <corners android:radius="16dp" />
+            <solid android:color="#CCCCCC" />
+        </shape>
+    </item>
+</selector>

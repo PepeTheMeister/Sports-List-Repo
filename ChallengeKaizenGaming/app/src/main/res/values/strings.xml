@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ChallengeKaizenGaming</string>
+
+    <string name="url">https://618d3aa7fe09aa00174408a.mockapi.io/api/</string>
+    <string name="empty_text">There are no games schedule</string>
+    <string name="empty_text_favourite">There are no favourite events saved</string>
+</resources>

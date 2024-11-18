@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp">
+
+    <RelativeLayout
+        android:id="@+id/sportHeader"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingEnd="10dp"
+        android:background="@color/white">
+
+
+        <TextView
+            android:paddingStart="8dp"
+            android:id="@+id/textHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sport 1"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/baseline_circle_24"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true" />
+
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            app:track="@drawable/star_track"
+            android:thumb="@drawable/star_thumb"
+            android:id="@+id/switchCompact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/arrowIcon"
+            android:layout_centerVertical="true"
+
+            />
+
+        <ImageView
+            android:id="@+id/arrowIcon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/baseline_keyboard_arrow_up_24"
+            android:contentDescription="Arrow Icon" />
+    </RelativeLayout>
+
+    <TextView
+        tools:textColor="@color/black"
+        android:textColor="@color/white"
+        android:id="@+id/emptyText"
+        android:text="@string/empty_text_favourite"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:background="@drawable/sport_background"
+        android:elevation="2dp"
+        android:id="@+id/recyclerExpandable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_gravity="center"
+        android:paddingTop="8dp"
+        android:paddingStart="2dp"/>
+</LinearLayout>
