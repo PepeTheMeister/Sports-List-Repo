@@ -1,8 +1,6 @@
 package com.example.challengekaizengaming.adapter
 
-import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +9,6 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.widget.SwitchCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.example.challengekaizengaming.R
@@ -20,8 +17,6 @@ import com.example.challengekaizengaming.dto.SportDTO
 
 class SportAdapter(
     private var items: List<SportDTO>,
-    private val context : Activity,
-    private var sharedPreferences: SharedPreferences
 ) : RecyclerView.Adapter<SportAdapter.ExpandableViewHolder>() {
 
     private var filteredEvents : List<EventDTO> = listOf()
@@ -46,19 +41,17 @@ class SportAdapter(
         val sport = items[position]
         holder.header.text = sport.d
 
-        val adapter = EventAdapter(sport.e, sharedPreferences)
+        val adapter = EventAdapter(sport.e)
 
         holder.recyclerExpandable.layoutManager = GridLayoutManager(holder.itemView.context, 3)
         holder.recyclerExpandable.adapter = adapter
 
         holder.emptyText.visibility = if (sport.e.isEmpty()) View.VISIBLE else View.GONE
 
-        val favoritesSet = sharedPreferences.getStringSet("sport_${sport.i}", null)?.toMutableSet()
-            ?: mutableSetOf()
+
 
         if(sport.isFiltered){
-            filteredEvents =
-                sport.e.filter{event -> favoritesSet.contains(event.i)}
+            filteredEvents = getFilteredEvents(sport.e)
 
             holder.emptyText.visibility = if (filteredEvents.isEmpty()) View.VISIBLE else View.GONE
             adapter.setEvents(filteredEvents)
@@ -99,6 +92,11 @@ class SportAdapter(
     fun setItems(newList : List<SportDTO> ){
         items = newList
         notifyDataSetChanged()
+    }
+
+    fun getFilteredEvents(events: List<EventDTO>): List<EventDTO> {
+            return events.filter { it.isFavorite}
+
     }
 
 

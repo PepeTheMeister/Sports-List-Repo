@@ -7,6 +7,6 @@ data class EventDTO(
     val d : String,
     val tt : Long,
     val sh: String,
-    var isFavourite : Boolean
+    var isFavorite : Boolean
 )
 

@@ -1,7 +1,5 @@
 package com.example.challengekaizengaming
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -33,9 +31,6 @@ class MainActivity : AppCompatActivity() {
 
     private var listSports : MutableList<SportDTO> = mutableListOf()
 
-    private lateinit  var sharedPreferences : SharedPreferences
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,16 +46,16 @@ class MainActivity : AppCompatActivity() {
         swipeRefresh = findViewById(R.id.swipeRefresh)
         recyclerView = findViewById(R.id.sports_recycler_view)
         emptyTextView = findViewById(R.id.emptyText)
-        sharedPreferences = this.getSharedPreferences("FavouriteEvents", Context.MODE_PRIVATE)
 
-        sportAdapter = SportAdapter(listSports, this, sharedPreferences)
+        sportAdapter = SportAdapter(listSports)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = sportAdapter
 
         emptyTextView.visibility = if(listSports.isEmpty()) View.VISIBLE else View.GONE
 
         swipeRefresh.setOnRefreshListener {
-            getData()
+            listSports = createMockObjects()
+            //getData()
             swipeRefresh.isRefreshing = false
         }
     }

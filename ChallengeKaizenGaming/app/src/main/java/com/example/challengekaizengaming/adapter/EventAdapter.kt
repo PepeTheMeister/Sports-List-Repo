@@ -1,5 +1,6 @@
 package com.example.challengekaizengaming.adapter
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.os.CountDownTimer
 import android.view.LayoutInflater
@@ -16,9 +17,9 @@ import java.util.Calendar
 
 class EventAdapter(
     private var events: List<EventDTO>,
-    private var sharedPreferences: SharedPreferences
 ) :
     RecyclerView.Adapter<EventAdapter.EventViewHolder>() {
+
 
     class EventViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val countDownTimeView : TextView = itemView.findViewById(R.id.countdown_timer)
@@ -42,14 +43,16 @@ class EventAdapter(
         holder.competitor1View.text = eventName[0].trim()
         holder.competitor2View.text = eventName[1].trim()
 
+
+        val sharedPreferences = holder.itemView.context.getSharedPreferences("FavouriteEvents", Context.MODE_PRIVATE)
         val favoritesSet = sharedPreferences.getStringSet("sport_${event.si}", null)?.toMutableSet()
             ?: mutableSetOf()
 
         if(favoritesSet.contains(event.i)){
-            event.isFavourite = true
+            event.isFavorite = true
         }
 
-        if(event.isFavourite){
+        if(event.isFavorite){
             holder.starFavouritesView.setImageResource(R.drawable.baseline_star_yellow_24)
 
             if(!favoritesSet.contains(event.i)){
@@ -69,7 +72,7 @@ class EventAdapter(
         }
 
         holder.eventItemView.setOnClickListener {
-            event.isFavourite = !event.isFavourite
+            event.isFavorite = !event.isFavorite
             notifyItemChanged(position)
         }
 
