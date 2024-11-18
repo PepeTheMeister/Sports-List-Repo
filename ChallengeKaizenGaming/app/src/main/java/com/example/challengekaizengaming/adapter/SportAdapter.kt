@@ -68,6 +68,7 @@ class SportAdapter(
             holder.arrowIcon.setImageResource(R.drawable.baseline_keyboard_arrow_up_24)
         }
         else{
+            holder.emptyText.visibility = View.GONE
             holder.recyclerExpandable.visibility = View.GONE
             holder.arrowIcon.setImageResource(R.drawable.baseline_keyboard_arrow_down_24)
         }

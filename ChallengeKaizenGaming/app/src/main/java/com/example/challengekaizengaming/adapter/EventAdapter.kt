@@ -48,37 +48,31 @@ class EventAdapter(
         val favoritesSet = sharedPreferences.getStringSet("sport_${event.si}", null)?.toMutableSet()
             ?: mutableSetOf()
 
-        if(favoritesSet.contains(event.i)){
-            event.isFavorite = true
-        }
+        event.isFavorite = favoritesSet.contains(event.i)
 
         if(event.isFavorite){
             holder.starFavouritesView.setImageResource(R.drawable.baseline_star_yellow_24)
-
-            if(!favoritesSet.contains(event.i)){
-                favoritesSet.add(event.i)
-                sharedPreferences.edit().putStringSet("sport_${event.si}", favoritesSet).apply()
-            }
-
         }
         else{
             holder.starFavouritesView.setImageResource(R.drawable.baseline_star_outline_24)
+        }
+        holder.eventItemView.setOnClickListener {
+            event.isFavorite = !event.isFavorite
 
-            if(favoritesSet.contains(event.i)){
+            if(event.isFavorite){
+                favoritesSet.add(event.i)
+                sharedPreferences.edit().putStringSet("sport_${event.si}", favoritesSet).apply()
+            }
+            else{
                 favoritesSet.remove(event.i)
                 sharedPreferences.edit().putStringSet("sport_${event.si}", favoritesSet).apply()
             }
-
-        }
-
-        holder.eventItemView.setOnClickListener {
-            event.isFavorite = !event.isFavorite
             notifyItemChanged(position)
         }
 
         startCountdown(event.tt,
             onTick = { formattedTime ->
-                holder.countDownTimeView.text = formattedTime // Atualiza o TextView com o tempo restante
+                holder.countDownTimeView.text = formattedTime
             },
             onFinish = {
                 holder.countDownTimeView.text = "00:00:00"

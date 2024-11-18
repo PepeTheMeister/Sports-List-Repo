@@ -29,15 +29,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var emptyTextView : TextView
 
-    private var listSports : MutableList<SportDTO> = mutableListOf()
+    private var listSports : List<SportDTO> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        listSports = createMockObjects()
+        //listSports = createMockObjects()
         onFinishedInflate()
-        //getData()
+        getData()
 
     }
 
@@ -54,8 +54,8 @@ class MainActivity : AppCompatActivity() {
         emptyTextView.visibility = if(listSports.isEmpty()) View.VISIBLE else View.GONE
 
         swipeRefresh.setOnRefreshListener {
-            listSports = createMockObjects()
-            //getData()
+            //listSports = createMockObjects()
+            getData()
             swipeRefresh.isRefreshing = false
         }
     }
@@ -76,8 +76,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             } catch (e: Exception) {
-                Log.e("Network Error!", e.message.orEmpty())
-                Toast.makeText(this@MainActivity, "A network error has occurred", Toast.LENGTH_SHORT).show()
+                Log.e("MainActivity:Error: ", e.message.orEmpty())
+                Toast.makeText(this@MainActivity, "Error occur while fetching data", Toast.LENGTH_SHORT).show()
             }
         }
     }
