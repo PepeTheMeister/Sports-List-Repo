@@ -13,6 +13,7 @@ This Android app fetches a list of events from a given API endpoint and displays
 - **Error Handling**: Displays an appropriate message if no events are available or if there is an error fetching the data from the API.
 - **Expandable Events**: Users can collapse or expand the details of each event per sport.
 - **Compatibility**: The app is compatible with Android SDK 21 and above and works on both emulators and physical devices.
+- **JUnit Test**: The app has a JUnit test that verifies if the favorite events functionality is work correctly.
 
 ## Libraries and Architecture
 
